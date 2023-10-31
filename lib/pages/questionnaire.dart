@@ -29,7 +29,7 @@ void _showResultDialog(BuildContext context, bool isCorrect) {
           ),
         ),
         content: Text(
-          isCorrect ? 'You guessed right!' : 'That\'s not the right answer. Try again.', 
+          isCorrect ? 'You are correct!' : 'That\'s not the right answer...', 
           textAlign: TextAlign.center,
           style: TextStyle(
             color: textColor,
@@ -41,7 +41,7 @@ void _showResultDialog(BuildContext context, bool isCorrect) {
 }
 
 class _QuestionnairePageState extends State<QuestionnairePage>{
-  List<Question> allQuestions = Question.getAllQuestions();
+  List<Question> allQuestions = Question.getRandomQuestions(23); // Choose amount of questions
   int currentQuestionIndex = 0;
   int correctAnswers = 0;
 
@@ -60,7 +60,7 @@ class _QuestionnairePageState extends State<QuestionnairePage>{
   } else {
     Navigator.push(context, 
     MaterialPageRoute(
-      builder: (context) => EndPage(correctAnswers: correctAnswers)));
+      builder: (context) => EndPage(correctAnswers: correctAnswers, questionCount: allQuestions.length,)));
   }
 } 
 
@@ -72,6 +72,8 @@ class _QuestionnairePageState extends State<QuestionnairePage>{
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Image.asset('assets/images/flutter_logo.png'),
+            SizedBox(height: 25),
             Text(
               'Question:',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
