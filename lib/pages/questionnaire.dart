@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/models/questions_model.dart';
 import 'package:quiz_app/pages/end.dart';
 
+// CONFIG
+
+// This tells the app how many questions should be gathered.
+const int amountOfQuestions = 5;
+
+// CONFIG END
+
 class QuestionnairePage extends StatefulWidget {
   @override
   _QuestionnairePageState createState() => _QuestionnairePageState();
@@ -41,7 +48,7 @@ void _showResultDialog(BuildContext context, bool isCorrect) {
 }
 
 class _QuestionnairePageState extends State<QuestionnairePage>{
-  List<Question> allQuestions = Question.getRandomQuestions(23); // Choose amount of questions
+  List<Question> allQuestions = Question.getRandomQuestions(amountOfQuestions); // Choose amount of questions
   int currentQuestionIndex = 0;
   int correctAnswers = 0;
 
