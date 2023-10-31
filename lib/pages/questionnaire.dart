@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 import 'package:quiz_app/models/questions_model.dart';
 import 'package:quiz_app/pages/end.dart';
+
+/*
+  This pages handles all quiz related.
+  It gets it's data from "models/questions_model.dart" that keeps all the questions.
+  The datafile includes a function that returns random questions that are in the model.
+  The app uses minimal asyncronous code to handle the alertbox so it doesn't cause issues with the Future.delayed function.
+  When the user finishes answering a predefined amount of questions, the app displays end.dart
+*/
 
 // CONFIG
 
@@ -15,61 +24,78 @@ class QuestionnairePage extends StatefulWidget {
   _QuestionnairePageState createState() => _QuestionnairePageState();
 }
 
-void _showResultDialog(BuildContext context, bool isCorrect) {
+Future<void> _showResultDialog(BuildContext context, bool isCorrect) {
+  Completer<void> completer = Completer();
+
   showDialog(
     context: context,
+    barrierDismissible: false, // Prevents the dialog from closing prematurely.
     builder: (context) {
       Future.delayed(Duration(seconds: 2), () {
         Navigator.of(context).pop();
+        if (!completer.isCompleted) {
+          completer.complete(); // Complete the Future when the dialog is closed.
+        }
       });
 
       Color textColor = isCorrect ? Colors.green : Colors.red;
-
       return AlertDialog(
         title: Text(
-          isCorrect ? 'Correct!' : 'Oops!', 
+          isCorrect ? 'Correct!' : 'Oops!',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: textColor,
             fontSize: 18,
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
           ),
         ),
         content: Text(
-          isCorrect ? 'You are correct!' : 'That\'s not the right answer...', 
+          isCorrect ? 'You are correct!' : 'That\'s not the right answer...',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: textColor,
-          )
+          ),
         ),
       );
     },
   );
+
+  return completer.future;
 }
 
-class _QuestionnairePageState extends State<QuestionnairePage>{
-  List<Question> allQuestions = Question.getRandomQuestions(amountOfQuestions); // Choose amount of questions
+class _QuestionnairePageState extends State<QuestionnairePage> {
+  List<Question> allQuestions = Question.getRandomQuestions(
+      amountOfQuestions); // Choose amount of questions
   int currentQuestionIndex = 0;
   int correctAnswers = 0;
 
-  void answerSelected(int selectedIndex) {
-  bool isAnswerCorrect = selectedIndex == allQuestions[currentQuestionIndex].answer;
-  
-  if(isAnswerCorrect){
-    correctAnswers++;
-  }
+  void answerSelected(int selectedIndex) async {
+    bool isAnswerCorrect =
+        selectedIndex == allQuestions[currentQuestionIndex].answer;
 
-  if (currentQuestionIndex + 1 < allQuestions.length) {
-    _showResultDialog(context, isAnswerCorrect);
-    setState(() {
-      currentQuestionIndex++;
-    });
-  } else {
-    Navigator.push(context, 
-    MaterialPageRoute(
-      builder: (context) => EndPage(correctAnswers: correctAnswers, questionCount: allQuestions.length,)));
+    if (isAnswerCorrect) {
+      correctAnswers++;
+    }
+
+    await _showResultDialog(
+        context, isAnswerCorrect); // Wait until dialog is closed.
+
+    if (currentQuestionIndex + 1 < allQuestions.length) {
+      setState(() {
+        currentQuestionIndex++;
+      });
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => EndPage(
+            correctAnswers: correctAnswers,
+            questionCount: allQuestions.length,
+          ),
+        ),
+      );
+    }
   }
-} 
 
   @override
   Widget build(BuildContext context){

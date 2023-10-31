@@ -166,20 +166,24 @@ class Question {
         prompts: ['ThemeContainer', 'StyleWidget', 'Theme', 'ColorScheme']),
   ];
 
+  // Returns all questions that are available.
   static List<Question> getAllQuestions() {
     return questions;
   }
 
+  // This function returns random questions that are in a database.
   static List<Question> getRandomQuestions(int amountOfQuestions) {
+    // int amountOfQuestions is predefined at the top of questionnaire.dart.
     Random random = Random();
     List<Question> allQuestionsCopy = List.from(getAllQuestions());
     List<Question> newListQuestions = [];
 
     if (amountOfQuestions > allQuestionsCopy.length) {
-      print('Requested more questions than available.');
+      // Request asks for too many questions.
       return getAllQuestions();
     }
 
+    // Construct the new list with the random questions.
     for (var i = 0; i < amountOfQuestions; i++) {
       int randomInt = random.nextInt(allQuestionsCopy.length);
       newListQuestions.add(allQuestionsCopy[randomInt]);

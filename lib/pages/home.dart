@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/pages/questionnaire.dart';
 
+/*
+  This page welcomes the user to the questionnaire.
+  It displays a single button with a welcome message.
+  If the user presses the button the user will start questionnaire.dart file.
+*/
+
 class HomePage extends StatefulWidget{
   @override
   _HomePageState createState() => _HomePageState();

@@ -21,21 +21,31 @@ class _EndPage extends State<EndPage>{
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('You have fininished the Flutter quiz!',
-            textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold
-              )
-            ),
-            Text(
-              'You have answered ${widget.correctAnswers} out of ${widget.questionCount} questions correct.',
+            Image.asset('assets/images/flutter_logo.png'),
+            SizedBox(height: 30,),
+            Container(
+              width: 300,
+              child: Text('You have fininished the Flutter quiz!',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold
+                )
               ),
             ),
+            SizedBox(height: 30,),
+            Container(
+              width: 300,
+              child: Text(
+                'You have answered ${widget.correctAnswers} out of ${widget.questionCount} questions correctly.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
+            SizedBox(height: 30,),
             ElevatedButton(
               child: Text('Take the Flutter Quiz again!'),
               onPressed: () {
