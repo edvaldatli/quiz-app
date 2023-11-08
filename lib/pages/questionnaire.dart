@@ -8,7 +8,6 @@ import 'package:quiz_app/pages/end.dart';
   This pages handles all quiz related.
   It gets it's data from "models/questions_model.dart" that keeps all the questions.
   The datafile includes a function that returns random questions that are in the model.
-  The app uses minimal asyncronous code to handle the alertbox so it doesn't cause issues with the Future.delayed function.
   When the user finishes answering a predefined amount of questions, the app displays end.dart
 */
 
