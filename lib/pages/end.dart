@@ -56,52 +56,63 @@ class EndPageState extends State<EndPage>{
                   ),
                 ),
                 Container(
-                  height: 300,
-                  padding: EdgeInsets.only(left: 10),
-                  child: ListView.builder(
-                    itemCount: widget.questionCount,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Container(
-                          height: double.infinity,
-                          child: Icon(
-                            checkAnswer(index) ? Icons.check_circle : Icons.cancel,
-                            color: checkAnswer(index) ? Colors.green : Colors.red
-                          ),
-                        ),
-                        title: Text(
-                          widget.questionsAsked[index].question,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.questionsAsked[index].prompts[widget.questionsAsked[index].answer],
-                              style: const TextStyle(
-                                color: Colors.green,
-                                fontSize: 20
-                              ),
+                  height: 400,
+                  padding: const EdgeInsets.only(left: 10),
+                  child: ShaderMask(
+                    shaderCallback: (Rect rect) {
+                      return const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.transparent, Colors.black, Colors.transparent],
+                        stops: [0.0, 0.05, 2], // You can adjust the stops
+                      ).createShader(rect);
+                    },
+                    blendMode: BlendMode.dstIn,
+                    child: ListView.builder(
+                      itemCount: widget.questionCount,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Container(
+                            height: double.infinity,
+                            child: Icon(
+                              checkAnswer(index) ? Icons.check_circle : Icons.cancel,
+                              color: checkAnswer(index) ? Colors.green : Colors.red
                             ),
-                            Text(
-                              checkAnswer(index) ? '' : widget.questionsAsked[index].prompts[widget.answers[index]],
-                              style: checkAnswer(index)
-                              ? const TextStyle(
-                                color: Colors.green,
-                                fontSize: 16
+                          ),
+                          title: Text(
+                            widget.questionsAsked[index].question,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.questionsAsked[index].prompts[widget.questionsAsked[index].answer],
+                                style: const TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 20
+                                ),
+                              ),
+                              Text(
+                                checkAnswer(index) ? '' : widget.questionsAsked[index].prompts[widget.answers[index]],
+                                style: checkAnswer(index)
+                                ? const TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 16
+                                )
+                                : const TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16
+                                )
                               )
-                              : const TextStyle(
-                                color: Colors.red,
-                                fontSize: 16
-                              )
-                            )
-                          ]
-                        ),
-                      );
-                    }),
+                            ]
+                          ),
+                        );
+                      }),
+                  ),
                 ),
                 const SizedBox(height: 30,),
                 ElevatedButton(

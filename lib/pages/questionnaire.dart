@@ -56,10 +56,10 @@ Future<void> _showResultDialog(
             isCorrect ? 'That is correct!' : 'That is wrong!',
             textAlign: TextAlign.center,
             style: isCorrect
-            ? TextStyle(
+            ? const TextStyle(
               color: Colors.green,
             )
-            : TextStyle(
+            : const TextStyle(
               color: Colors.red
             )
           )
@@ -114,14 +114,14 @@ class _QuestionnairePageState extends State<QuestionnairePage> {
         body: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 80,
         ),
         LinearProgressIndicator(
           value: currentQuestionIndex / amountOfQuestions,
           minHeight: 20,
         ),
-        SizedBox(height: 50),
+        const SizedBox(height: 50),
         Center(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
