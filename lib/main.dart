@@ -3,24 +3,25 @@ import 'package:flutter/material.dart';
 import 'pages/home.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget{
+  const MyApp({super.key});
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
 
 
-class _MyAppState extends State<MyApp>{
+class MyAppState extends State<MyApp>{
   @override
   Widget build(BuildContext context){
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
-      home: HomePage()
+      home: const HomePage()
     );
   }
 }

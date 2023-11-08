@@ -5,13 +5,13 @@ class EndPage extends StatefulWidget{
   final int correctAnswers;
   final int questionCount;
 
-  EndPage({required this.correctAnswers, required this.questionCount});
+  const EndPage({super.key, required this.correctAnswers, required this.questionCount});
 
   @override
-  _EndPage createState() => _EndPage();
+  EndPageState createState() => EndPageState();
 }
 
-class _EndPage extends State<EndPage>{
+class EndPageState extends State<EndPage>{
   @override
   
   Widget build(BuildContext context){
@@ -22,8 +22,8 @@ class _EndPage extends State<EndPage>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('assets/images/flutter_logo.png'),
-            SizedBox(height: 30,),
-            Container(
+            const SizedBox(height: 30,),
+            const SizedBox(
               width: 300,
               child: Text('You have fininished the Flutter quiz!',
               textAlign: TextAlign.center,
@@ -33,21 +33,21 @@ class _EndPage extends State<EndPage>{
                 )
               ),
             ),
-            SizedBox(height: 30,),
-            Container(
+            const SizedBox(height: 30,),
+            SizedBox(
               width: 300,
               child: Text(
                 'You have answered ${widget.correctAnswers} out of ${widget.questionCount} questions correctly.',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold
                 ),
               ),
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             ElevatedButton(
-              child: Text('Take the Flutter Quiz again!'),
+              child: const Text('Take the Flutter Quiz again!'),
               onPressed: () {
                 Navigator.push(context, 
                 MaterialPageRoute(

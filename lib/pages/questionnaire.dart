@@ -20,6 +20,8 @@ const int amountOfQuestions = 5;
 // CONFIG END
 
 class QuestionnairePage extends StatefulWidget {
+  const QuestionnairePage({super.key});
+
   @override
   _QuestionnairePageState createState() => _QuestionnairePageState();
 }
@@ -31,7 +33,7 @@ Future<void> _showResultDialog(BuildContext context, bool isCorrect) {
     context: context,
     barrierDismissible: false, // Prevents the dialog from closing prematurely.
     builder: (context) {
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 2), () {
         Navigator.of(context).pop();
         if (!completer.isCompleted) {
           completer.complete(); // Complete the Future when the dialog is closed.
@@ -106,43 +108,50 @@ class _QuestionnairePageState extends State<QuestionnairePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('assets/images/flutter_logo.png'),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             Text(
+              "Question: ${currentQuestionIndex+1}/$amountOfQuestions",
+              style: const TextStyle(
+                fontSize: 18
+              ),
+            ),
+            const SizedBox(height: 5,),
+            const Text(
               'Question:',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 5,),
-            Container(
+            const SizedBox(height: 5,),
+            SizedBox(
               width: 300,
               child: Text(
                 allQuestions[currentQuestionIndex].question,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             ...allQuestions[currentQuestionIndex].prompts.asMap().entries.map((entry) {
               int idx = entry.key;
               String option = entry.value;
               return Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.all(8),
-                    width: 200,
+                    margin: const EdgeInsets.all(10),
+                    width: 240,
                     height: 60,
                     child: ElevatedButton(
                       onPressed: () => answerSelected(idx),
                       child: Text(
                         option,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
+                        style: const TextStyle(
+                          fontSize: 18,
                           fontWeight: FontWeight.bold
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 8,),
+                  const SizedBox(height: 8,),
                 ]
               );
             }).toList(),
