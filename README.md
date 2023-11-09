@@ -4,5 +4,6 @@
 ## Footage of app
 
 
-https://github.com/edvaldatli/quiz-app/assets/10516151/b997b77a-155d-4660-aa28-4e97e15fa993
+
+https://github.com/edvaldatli/quiz-app/assets/10516151/6ce69efc-c3dd-4a0f-9e72-70aef4a05c9e
 
