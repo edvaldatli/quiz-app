@@ -16,11 +16,13 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
 );
+print("Firebase initialized: ${Firebase.apps[0]}");
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget{
   const MyApp({super.key});
+  
 
   @override
   _MyAppState createState() => _MyAppState();

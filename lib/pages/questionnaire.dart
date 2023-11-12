@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:quiz_app/models/questions_model.dart';
 import 'package:quiz_app/pages/end.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 /*
   This pages handles all quiz related.
@@ -17,6 +18,7 @@ import 'package:quiz_app/pages/end.dart';
 const int amountOfQuestions = 5;
 
 // CONFIG END
+
 
 class QuestionnairePage extends StatefulWidget {
   const QuestionnairePage({super.key});
